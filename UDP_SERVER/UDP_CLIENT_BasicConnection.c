@@ -38,5 +38,5 @@ int main( void )
         printf( "message sent\n" );
     }
 
-   // close(fd);
+    close(fd);
 }

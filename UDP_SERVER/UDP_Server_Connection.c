@@ -1,3 +1,5 @@
+/* connection lingers for a while then closses  */
+
 #include <stdio.h>      // Default System Calls
 #include <stdlib.h>     // Needed for OS X
 #include <string.h>     // Needed for Strlen

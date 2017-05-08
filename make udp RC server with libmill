@@ -1,0 +1,14 @@
+make udp RC server with libmill
+
+put the listener in a go routine so metal detector to do something else
+
+look at the libmill test folder
+
+make file io goable to write to rpi flash card
+
+MAKE THESE GOABLE
+1. udp socket
+2. file io
+3. SPI
+
+Read the documentation of the library. Look at tests.
