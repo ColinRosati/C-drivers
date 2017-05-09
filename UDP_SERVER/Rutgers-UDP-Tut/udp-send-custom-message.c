@@ -70,7 +70,7 @@ int main(void)
 
 	//make my message
 		printf("Your Message: ");
-		scanf("%[^\n]", str1); // scanf terminates at the first new line
+		scanf("%50[^\n]", str1); // scanf terminates at the first new line
 		my_message = str1;
 
 	
