@@ -11,6 +11,7 @@
 #define BUFLEN      512
 #define TRUE        1
 #define SERVERLEN   1024
+#define PORT 21234
 
 int main( void )
 {
@@ -23,7 +24,7 @@ int main( void )
     struct sockaddr_in serveraddr;
     memset( &serveraddr, 0, sizeof(serveraddr) );
     serveraddr.sin_family = AF_INET;
-    serveraddr.sin_port = htons( 50037 );
+    serveraddr.sin_port = htons(PORT);
     serveraddr.sin_addr.s_addr = htonl( INADDR_ANY );
 
     if ( bind(fd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ) {

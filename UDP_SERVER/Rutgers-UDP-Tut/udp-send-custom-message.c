@@ -33,7 +33,7 @@ int main(void)
 	int fd, i, slen=sizeof(remaddr);
 	char buf[BUFLEN];	/* message buffer */
 	int recvlen;		/* # bytes in acknowledgement message */
-	char *server = "127.0.0.1";	/* change this to use a different server */
+	char *server = "127.0.0.1";	/* change this to use a different server  THIS IS ALL YOU NEED TO CHANGE TO SEND TO ANOTHER  MACHINE*/
 	//char *my_message = "hello, this is a test message";
 	char *my_message;
 	char str1[20];
