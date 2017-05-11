@@ -33,7 +33,7 @@ int main( void )
     }
 
     char buffer[200];
-    for ( int i = 0; i < 4; i++ ) {
+    for ( int i = 0; i < 20; i++ ) {
         int length = recvfrom( fd, buffer, sizeof(buffer) - 1, 0, NULL, 0 );
         if ( length < 0 ) {
             perror( "recvfrom failed" );

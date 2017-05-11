@@ -25,26 +25,42 @@ int main( void )
      char *server = "127.0.0.1";
      char answer;
      char  *myserver = calloc(1,1), buffer[BUFFERSIZE];
+     char string[BUFFERSIZE];
+     int i = 0;
+
 
 
      printf("Do You want to change IP address? Y or N: \n");
      scanf("%c", &answer);
 
- if(answer == 'y'|| answer == 'Y'){
-        printf("New IP");
-	     	
-	    while( fgets(buffer, BUFFERSIZE , stdin) )/* break with ^D or ^Z */
-		{
+ 	if(answer == 'y'|| answer == 'Y'){
+   		 printf("New IP \n");
+      
+   		
+		    if (!fgets(string, BUFFERSIZE, stdin ))
+		        // break;
+		    printf("%s", string);
+		    }
+		// } while (string[0] != '\n');
+		// 	return 0;
+		
+
+
+
+	 //    while( fgets(buffer, BUFFERSIZE , stdin) )// break with ^D or ^Z 
+		// {
 			
-			printf("%s\n", buffer);
-		}
+		// 	printf("%s\n", buffer);
+
+		// }
 	    
-    } else {
+    } 
+    else {
 	    printf("%s\n", server);
 	    printf("Didnt want to change ");
 	}
 
-	printf("now your using %s", myserver);
+	printf("now your using %s", string);
 
 
 	return 0;

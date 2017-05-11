@@ -34,7 +34,6 @@ int main(void)
 	char buf[BUFLEN];	/* message buffer */
 	int recvlen;		/* # bytes in acknowledgement message */
 	char *server = "127.0.0.1";	/* change this to use a different server  THIS IS ALL YOU NEED TO CHANGE TO SEND TO ANOTHER  MACHINE*/
-	//char *my_message = "hello, this is a test message";
 	char *my_message;
 	char str1[20];
 
@@ -74,16 +73,7 @@ int main(void)
 		my_message = str1;
 
 	
-	/* now let's send the messages */
-
-	// for (i=0; i < MSGS; i++) { //this loops through multiple packets printing the same messgae
-	// 	printf("Sending packet %d to %s port %d\n", i, server, PORT);
-	// 	sprintf(buf, "This is packet %d", i);
-	// 	if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&remaddr, slen)==-1) {
-	// 		perror("sendto");
-	// 		//return 0;
-	// 		//exit(1);
-	// 	} 
+	/* now let's send our messages */
 
 		while (1) {
 		printf("Sending packet %d to %s port %d\n", i, server, PORT);
