@@ -6,7 +6,7 @@ look at the libmill test folder
 
 make file io goable to write to rpi flash card
 
-MAKE THESE GOABLE
+MAKE THESE GO-ABLE
 1. udp socket
 2. file io
 3. SPI

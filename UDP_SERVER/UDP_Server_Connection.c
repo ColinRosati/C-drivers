@@ -13,6 +13,7 @@
 #define BUFLEN      512
 #define TRUE        1
 #define SERVERLEN   1024
+#define PORT 21234
 
 int main( void )
 {
@@ -32,7 +33,7 @@ int main( void )
     struct sockaddr_in serveraddr; 					// initialize the pointer for the socket address name
     memset( &serveraddr, 0, sizeof(serveraddr) );	// addresses the server space, telling memset the size also
     serveraddr.sin_family = AF_INET;     //designates the address format that goes with the Internet namespace. this is passed to sin.family, the address family or format of the socket address
-    serveraddr.sin_port = htons( 50037 );  // port number. htons converts to server readable info  
+    serveraddr.sin_port = htons(PORT);  // port number. htons converts to server readable info  
     serveraddr.sin_addr.s_addr = htonl( INADDR_ANY ); //"any incoming address" binding to an address
 
     if ( bind(fd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ) {

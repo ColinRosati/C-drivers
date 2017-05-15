@@ -62,7 +62,7 @@ int main(void)
 	memset((char *) &remaddr, 0, sizeof(remaddr));
 	remaddr.sin_family = AF_INET;
 	remaddr.sin_port = htons(PORT);
-	if (inet_aton(server, &remaddr.sin_addr)==0) {
+	if (inet_aton(server, &remaddr.sin_addr)==0) { // this is where we tell the address of the IP
 		fprintf(stderr, "inet_aton() failed\n");
 		//exit(1);
 	}

@@ -38,7 +38,7 @@ int main( void )
     memset( &serveraddr, 0, sizeof(serveraddr) );
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_port = htons(PORT);              
-    serveraddr.sin_addr.s_addr = htonl( 0x7f000001 );  
+    serveraddr.sin_addr.s_addr = htonl(PORT);  
     if (inet_aton(server, &remaddr.sin_addr)==0) {
         fprintf(stderr, "inet_aton() failed\n");
     } 
