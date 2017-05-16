@@ -18,8 +18,9 @@
 
 
 #define PORT 21234
-
 #define BUFSIZE 2048
+
+//gcc -o gorecv udp-recv-libmill.c /usr/local/lib/libmill.a  use this to compile
 
 int
 main(int argc, char **argv)
@@ -62,10 +63,10 @@ main(int argc, char **argv)
 		}
 		else
 			printf("uh oh - something went wrong!\n");
-		sprintf(buf, "call number %d", msgcnt++);
-		printf("sending response \"%s\"\n", buf);
-		if (sendto(fd, buf, strlen(buf), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
-			perror("sendto");
+			sprintf(buf, "call number %d", msgcnt++);
+			printf("sending response \"%s\"\n", buf);
+			if (sendto(fd, buf, strlen(buf), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
+				perror("sendto");
 	}
 	/* never exits */
 }

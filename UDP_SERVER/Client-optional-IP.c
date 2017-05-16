@@ -26,6 +26,7 @@ int main( void )
     int fd, slen=sizeof(remaddr);
     char *server = "127.0.0.1";  //Local Machine or other machine
     char *newIP;
+    char ipbuffer[20];
     char answer;
     char msganswer; 
     char buf[BUFLEN];
@@ -38,8 +39,9 @@ int main( void )
     char string[BUFFERSIZE];
     char ipstring[BUFFERSIZE];
 
-    int i = 0;
+    int i = 1;
     
+    printf("%s\n",my_message);
 
     if ( (fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
         perror("socket failed");
@@ -53,35 +55,28 @@ int main( void )
     if (inet_aton(server, &remaddr.sin_addr)==0) {
         fprintf(stderr, "inet_aton() failed\n");
     } 
-    
-
 
     printf("Do you want to send a message? Y or N: \n");
-    
+
     fgets(line, sizeof(line),stdin);
     sscanf(line, "%30[^\n]\n", &msganswer);
     if(msganswer == 'y'|| msganswer == 'Y'){          
         printf("Your Message: ");
 
-         for(;;++i)
-            {
-                string[i] = getchar();
-                if (i > 0 && string[i] == '\n' && string[i] == '\n') break;                
-            }
+         // for(;;++i)
+         //    {
+         //        string[i] = getchar();
+         //        if (i > 0 && string[i] == '\n' && string[i] == '\n') break;                
+         //    }
+         //    string[i] = 0;
 
-            string[i] = 0;
-
-
-        // while(fgets(buffer, sizeof buffer, stdin))/* break with ^D or ^Z. buffer holds our new IP */
-        // {
-        //     scanf("%30[^\n]", buffer);
-        //     size_t len = strlen(buffer);
-        //     if (len > 0 && buffer[len-1] == '\n') {
-        //       buffer[--len] = '\0';
-        //     }
-        // }
-
-        my_message = string; 
+        fgets(buffer, sizeof buffer, stdin);/* break with ^D or ^Z. buffer holds our new IP */
+        scanf("%30[^\n]", buffer);
+        size_t len = strlen(buffer);
+        if (len > 0 && buffer[len-1] == '\n') {
+            buffer[--len] = '\0';
+        }
+        my_message = buffer; 
         printf("%s\n", my_message);
 
     } else {
@@ -89,55 +84,55 @@ int main( void )
     }
           
 
-    printf("Do You want to change IP address? Y or N: \n");
+    getchar();
 
+    //if(my_message != NULL){
+    while(1){
+        printf("Do You want to change IP address? Y or N: \n");
+        fgets(line2, sizeof(line2),stdin);
+        sscanf(line2, "%30[^\n]", &answer);
+        if(answer == 'y'|| answer == 'Y'){
+            printf("New IP: \n");
 
-    fgets(line2, sizeof(line2),stdin);
-    sscanf(line2, "%30[^\n]", &answer);
-    if(answer == 'y'|| answer == 'Y'){
-        printf("New IP: \n");
+            while(1){
+                fgets(ipbuffer, sizeof ipbuffer, stdin);/* break with ^D or ^Z. buffer holds our new IP */
+                scanf("%30[^\n]", ipbuffer);
+                size_t len = strlen(ipbuffer);
+                if (len > 0 && ipbuffer[len-1] == '\n') {
+                    ipbuffer[--len] = '\0';
+                }
+                newIP = ipbuffer; 
+                printf("%s\n", newIP);
 
-        for(;;++i)
-            {
-                ipstring[i] = getchar();
-                if (i > 0 && ipstring[i] == '\n' && ipstring[i] == '\n') break;                
+                memset((char *) &remaddr, 0, sizeof(remaddr));
+                remaddr.sin_family = AF_INET;
+                remaddr.sin_port = htons(PORT);
+                if (inet_aton(newIP, &remaddr.sin_addr)==0) { // initializing IP with new address
+                    fprintf(stderr, "inet_aton() failed\n");
+                } 
+
+                if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&remaddr, slen)==-1) {
+                    perror("sendto");
+                }
+            
+                printf("message: %s sent on IP %s", my_message, newIP);
+                return 0;
             }
-
-            ipstring[i] = 0;
-
-        newIP = ipstring; 
-        printf("%s\n", ipstring);
-
-        
-        
-        memset((char *) &remaddr, 0, sizeof(remaddr));
-        remaddr.sin_family = AF_INET;
-        remaddr.sin_port = htons(PORT);
-        if (inet_aton(newIP, &remaddr.sin_addr)==0) { // initializing IP with new address
-            fprintf(stderr, "inet_aton() failed\n");
-    
-         } 
-
-
-            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&remaddr, slen)==-1) {
-                perror("sendto");
-            }
-        
-           printf("message: %s sent on IP %s", my_message, newIP);
-        
-    }
-     else {
-
-
-        for ( int i = 0; i < 1; i++ ) {
-            if (sendto( fd, my_message, strlen(my_message), 0, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ) {
-            perror( "sendto failed" );
-            break;
-            }
-           printf( "message sent on local server\n" );
+            
         }
-    }  
-    
+        else {
+
+
+            for ( int i = 0; i < 1; i++ ) {
+                if (sendto( fd, my_message, strlen(my_message), 0, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ) {
+                    perror( "sendto failed" );
+                break;
+                }
+               printf( "message sent on local server\n" );
+               return 0;
+            }
+        }  
+    }
 
     printf("%c\n", answer);
 
